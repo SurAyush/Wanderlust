@@ -1,0 +1,68 @@
+<% layout('layout/boilerplate') -%>
+<body>
+    <h2>Add New Listing</h2>
+    <br>
+    <div class="form-div">
+        <form method="POST" action="/listings" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="title" class="form-label">Listing Title</label>
+              <input type="text" class="form-control" id="title" name="listings[title]" placeholder="Catchy Title!" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Enter Valid Title
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="listings[description]" placeholder="About the place" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter A Short Description
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Enter location</label>
+                <input type="text" class="form-control" id="location" name="listings[location]" placeholder="Jaipur, Rajasthan" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Location
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="country" class="form-label">Email country</label>
+                <input type="text" class="form-control" id="country" name="listings[country]" placeholder="India" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Country
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Image link</label>
+                <input type="text" class="form-control" id="image" name="listings[image]" placeholder="https://xyzimg.com">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price Per Night</label>
+                <input type="text" class="form-control" id="price" name="listings[price]" placeholder="999" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Price
+                </div>
+              </div>
+              <br>
+            <button type="submit" class="btn btn-primary mybtn">Submit</button>
+          </form>
+    </div>
+    </body>

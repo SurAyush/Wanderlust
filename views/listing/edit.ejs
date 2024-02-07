@@ -1,0 +1,71 @@
+<% layout('layout/boilerplate') -%>
+<body>
+    <h2>Edit current Listing</h2>
+    <div class="form-div">
+        <form method="POST" action="/listings/<%=el._id%>?_method=PUT" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="title" class="form-label">Listing Title</label>
+              <input type="text" class="form-control" id="title" name="title" placeholder="Catchy Title!" value="<%=el.title%>" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Enter Valid Title
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" placeholder="About the place" value="<%=el.description%>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter A Short Description
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Enter location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Jaipur, Rajasthan" value="<%=el.location%>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Location
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="country" class="form-label">Email country</label>
+                <input type="text" class="form-control" id="country" name="country" placeholder="India" value="<%=el.country%>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Country Name
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Image link</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="https://xyzimg.com" value="<%=el.image%>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Image Link
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price Per Night</label>
+                <input type="number" class="form-control" id="price" name="price" placeholder="999" value="<%=el.price%>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Enter Valid Price
+                </div>
+              </div>
+              <br>
+            <button type="submit" class="btn btn-primary mybtn">Edit Changes</button>
+          </form>
+    
+    </div>
+</body>

@@ -1,0 +1,95 @@
+body{
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+}
+a{
+    text-decoration: none;
+}
+/* #ff385C */
+/* Navbar */
+.navbar{
+    background-color: #b2beb5;
+    height: 10 rem;
+    margin-bottom: 1rem;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+.navbar-brand{
+    color: #ff385C;
+    font-weight: 600;
+}
+
+/* card for id page*/
+.card-listing{
+    width: 40%;
+    border: none;
+    margin: auto;
+}
+.card-img-top{
+    height: 55vh;
+    width: 100%;
+    border-radius: 3%;
+}
+
+h3{
+    margin-left: 2rem;
+    color:#ff385C;
+    font-size: 2rem;
+    text-decoration: underline;
+    font-weight: 600;
+}
+h2{
+    text-align: center;
+}
+
+/* footer */
+.ft{
+    text-align: center;
+    height: 4rem;
+    background-color: #F8F9FA;
+    width: 100%;
+}
+.ft .ft-sm i{
+    font-size: 1.25rem;
+    opacity: 0.6;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+.ft .ft-sm i:hover{
+    opacity: 1;
+    font-size: 1.35rem;
+}
+.ft .end{
+    margin: auto;
+    height: 0px;
+    width: 80%;
+    border: solid #b2beb5 1px;
+}
+.footer{
+    margin-top: -0.5rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+.line{
+    opacity: 0.7;
+    height:30%;
+    width: 90%;
+    border-top: 1px solid #b2beb5;
+}
+
+/* form */
+.form-div{
+    width: 60%;
+    margin: auto;
+}
+.mybtn{
+    background-color: #ff385C !important;
+}
+.mybtn2{
+    background-color: #000 !important;
+}

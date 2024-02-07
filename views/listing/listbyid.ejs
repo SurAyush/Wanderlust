@@ -1,0 +1,53 @@
+<% layout('layout/boilerplate') -%>
+<body>
+    <div class="card card-listing">
+        <img src="<%=el.image%>" class="card-img-top" alt="Destination Picture">
+        <div class="card-body">
+          <h5 class="card-title"><b><%=el.title%></b></h5>
+          <p class="card-text"><%=el.description%></p>
+          <p class="card-text"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night</i></p>
+          <p class="card-text"><%=el.location%></p>
+          <p class="card-text"><b><%=el.country%></b></p>
+        </div>
+        <form class="ctr-frm" method="post" action = "/listings/<%=el._id%>?_method=DELETE">
+            <button type="button" class="btn btn-primary mybtn"><a style="color: white" href="/listings/<%=el._id%>/edit">Edit the details</a></button>
+          &nbsp;&nbsp;&nbsp;
+            <button type = "submit" class="btn btn-primary mybtn2">Delete the place from WanderLust</button>
+        </form>
+        <br><br>
+        <hr>
+        <h5>Review this place!!!</h5>
+        <br>
+        <form action="/listings/<%=el._id%>/review" method="post" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="rate" class="form-label">Rate out of 5</label>
+            <input type="range" class="form-range" id="rate" min="1" max="5" step="1" value="3" name="review[rating]">
+          </div>
+          <div class="mb-3">
+            <label for="rev" class="form-label">Add a review</label><br>
+            <textarea name="review[content]" id="rev" rows="5" cols="45" required></textarea>
+            <div class="invalid-feedback">
+              Enter Review Content
+            </div>
+          </div>
+          <button class="btn btn-outline-info">Submit</button>
+        </form>
+        <br><hr>
+        <h5>All Reviews</h5>
+        <br>
+          <div class="row">
+          <% for(it of el.reviews ) { %>
+            <div class="card col-5 ms-3 mb-2">
+              <h5 class="card-title">Anonymous</h5>
+              <p class="card-text"><b><%=it.rating%> stars</b></p>
+              <p class="card-text"><%=it.content%></p>
+              <form class="mb-3" method="post" action="/listings/<%=el._id%>/reviews/<%=it._id%>?_method=DELETE">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          <% } %>
+          </div>
+      </div>
+      <br><br><br>
+    
+</body>

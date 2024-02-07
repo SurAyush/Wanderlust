@@ -1,0 +1,24 @@
+/* for all listing page only */
+.card-container{
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.card{
+    width: 20rem;
+    height: 26rem;
+    margin: 1rem 0.5rem 1rem 0.5rem;
+    border: none;
+}
+.card-img-top{
+    height: 18rem;
+    width: 100%;
+    border-radius: 2%;
+}
+.card:hover{
+    opacity: 0.8;
+}
