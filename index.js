@@ -106,13 +106,14 @@ app.get("/listings/:id/edit",asyncWrap(async (req,res)=>{
 
 app.put("/listings/:id",asyncWrap(async (req,res,next)=>{
     let result = listingSchema.validate(req.body);
-    console.log(result);
+    // console.log(result);
     if(result.error){
         throw new ExpressError(400, result.error)
     }
     else{
         let id = req.params.id;
-        await Listing.findByIdAndUpdate(id,req.body,{runValidators: true});
+        console.log(req.body);
+        await Listing.findOneAndUpdate({_id: id},req.body.listings,{runValidators: true});
         res.redirect(`/listings/${id}`);
     }
 }));

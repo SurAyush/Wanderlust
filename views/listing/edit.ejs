@@ -5,7 +5,7 @@
         <form method="POST" action="/listings/<%=el._id%>?_method=PUT" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="title" class="form-label">Listing Title</label>
-              <input type="text" class="form-control" id="title" name="title" placeholder="Catchy Title!" value="<%=el.title%>" required>
+              <input type="text" class="form-control" id="title" name="listings[title]" placeholder="Catchy Title!" value="<%=el.title%>" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -15,7 +15,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" name="description" placeholder="About the place" value="<%=el.description%>" required>
+                <input type="text" class="form-control" id="description" name="listings[description]" placeholder="About the place" value="<%=el.description%>" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">Enter location</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Jaipur, Rajasthan" value="<%=el.location%>" required>
+                <input type="text" class="form-control" id="location" name="listings[location]" placeholder="Jaipur, Rajasthan" value="<%=el.location%>" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -34,8 +34,8 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="country" class="form-label">Email country</label>
-                <input type="text" class="form-control" id="country" name="country" placeholder="India" value="<%=el.country%>" required>
+                <label for="country" class="form-label">Enter country</label>
+                <input type="text" class="form-control" id="country" name="listings[country]" placeholder="India" value="<%=el.country%>" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -45,7 +45,7 @@
               </div>
               <div class="mb-3">
                 <label for="image" class="form-label">Image link</label>
-                <input type="text" class="form-control" id="image" name="image" placeholder="https://xyzimg.com" value="<%=el.image%>" required>
+                <input type="text" class="form-control" id="image" name="listings[image]" placeholder="https://xyzimg.com" value="<%=el.image%>" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -55,7 +55,7 @@
               </div>
               <div class="mb-3">
                 <label for="price" class="form-label">Price Per Night</label>
-                <input type="number" class="form-control" id="price" name="price" placeholder="999" value="<%=el.price%>" required>
+                <input type="number" class="form-control" id="price" name="listings[price]" placeholder="999" value="<%=el.price%>" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
