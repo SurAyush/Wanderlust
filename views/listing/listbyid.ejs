@@ -18,7 +18,7 @@
         <hr>
         <h5>Review this place!!!</h5>
         <br>
-        <form action="/listings/<%=el._id%>/review" method="post" class="needs-validation" novalidate>
+        <form action="/listings/<%=el._id%>/reviews" method="post" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="rate" class="form-label">Rate out of 5</label>
             <input type="range" class="form-range" id="rate" min="1" max="5" step="1" value="3" name="review[rating]">
