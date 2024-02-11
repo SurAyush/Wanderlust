@@ -5,7 +5,19 @@ const path = require("path");
 const methodOverride = require('method-override');
 const ejsmate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
+const session = require("express-session");
+const flash = require("connect-flash");
 
+const sessionOptions = {
+    secret: "mysupseccode123",
+    resave: false,
+    saveUninitialized:true,
+    cookie:{
+        expires: Date.now() + (1000*60*24*7),
+        maxAge: Date.now() + (1000*60*24*7),
+        httpOnly: true
+    }
+};
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"/views"));
@@ -26,6 +38,16 @@ main().then(()=>{
 }).catch((err)=>{
     console.log(err);
 });
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+//saving flash message in res.locals
+app.use((req,res,next)=>{
+    res.locals.sucmsg = req.flash("success");
+    res.locals.errmsg = req.flash("error");
+    next();
+})
 
 //requiring routes
 const listroute = require("./routes/listings.js");
