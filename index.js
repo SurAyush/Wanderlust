@@ -7,6 +7,9 @@ const ejsmate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const user = require("./models/user.js");
 
 const sessionOptions = {
     secret: "mysupseccode123",
@@ -42,16 +45,41 @@ main().then(()=>{
 app.use(session(sessionOptions));
 app.use(flash());
 
+// using passport package to authenticate
+// use passport middlewares after session only (passport needs express sessions to keep track)
+
+app.use(passport.initialize());   //to initialize passport before every call
+app.use(passport.session());    //to keep track of the session, if user is logged in, we don't ask to re-login in the same session
+
+passport.use(new LocalStrategy(user.authenticate()));   //for authentication of users via passport-local
+
+passport.serializeUser(user.serializeUser());       //to store info related to the user in the session
+passport.deserializeUser(user.deserializeUser());   //to remove info related to the user in the session
+
 //saving flash message in res.locals
 app.use((req,res,next)=>{
     res.locals.sucmsg = req.flash("success");
     res.locals.errmsg = req.flash("error");
     next();
-})
+});
+
+// demo user route (for testing purposes)
+// app.get("/demouser",async (req,res)=>{
+//     let u1 = new user({
+//         email: "abc@hotmail.com",
+//         username: "abc"
+//     });     //we don't add password here
+
+//     let registeredUser = await user.register(u1,"hello123");        //hello123 is the password
+//     res.send(registeredUser);
+// });
+
+
 
 //requiring routes
 const listroute = require("./routes/listings.js");
 const reviewroute = require("./routes/reviews.js");
+const userroute = require("./routes/users.js");
 
 app.listen(port,()=>{
     console.log("Listening to port "+port);
@@ -63,6 +91,7 @@ app.get("/",(req,res)=>{
 
 app.use("/listings",listroute);
 app.use("/listings/:id/reviews",reviewroute);
+app.use("/",userroute);
 
 
 app.all("*",(req,res,next)=>{

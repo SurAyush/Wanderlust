@@ -1,0 +1,47 @@
+<% layout('layout/boilerplate') -%>
+<div class="row mt-3">
+    <div class="col-6 offset-3">
+      <br><br>
+        <h2><b>Sign-up Page</b></h2>
+        <br><br>
+    <form method="POST" action="/signup" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email-ID</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="xyz@gmail.com" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Enter Valid Title
+      </div>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="abc_12" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Enter an username please
+        </div>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="password" class="form-label">Enter Password</label>
+        <input type="password" class="form-control" id="location" name="password" placeholder="strong_password" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Enter Valid Password
+        </div>
+      </div>
+      <br>
+      <br>
+    <button type="submit" class="btn btn-primary mybtn">Sign-Up</button>
+    <br><br>
+    <a href="/login"><button type="button" class="btn btn-primary">Login Instead</button></a>
+    </div>
+</div>
+  </form>
