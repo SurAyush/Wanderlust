@@ -60,6 +60,7 @@ passport.deserializeUser(user.deserializeUser());   //to remove info related to 
 app.use((req,res,next)=>{
     res.locals.sucmsg = req.flash("success");
     res.locals.errmsg = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
 

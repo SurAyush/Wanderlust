@@ -5,6 +5,7 @@ const Review = require("../models/reviews");
 const asyncWrap = require("../utils/asyncWrap");
 const ExpressError = require("../utils/ExpressError");
 const {listingSchema} = require("../schema"); 
+const {isLoggedIn} = require("../middlewares");
 
 router.get("/",(req,res)=>{
     Listing.find({}).then((response)=>{
@@ -14,7 +15,7 @@ router.get("/",(req,res)=>{
     });
 });
 
-router.get("/new",(req,res)=>{
+router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listing/newlist.ejs");
 });
 
@@ -28,7 +29,7 @@ router.get("/:id",asyncWrap(async(req,res,next)=>{
     res.render("listing/listbyid.ejs",{el: obj});
 }));
 
-router.post("/",asyncWrap(async (req,res,next)=>{
+router.post("/",isLoggedIn,asyncWrap(async (req,res,next)=>{
     let result = listingSchema.validate(req.body);
     console.log(result);
     if(result.error){
@@ -42,7 +43,8 @@ router.post("/",asyncWrap(async (req,res,next)=>{
     }
 }));
 
-router.get("/:id/edit",asyncWrap(async (req,res)=>{
+//edit route
+router.get("/:id/edit",isLoggedIn,asyncWrap(async (req,res)=>{
     let el = await Listing.findById(req.params.id);
     if(!el){
         req.flash("error","Listing not found");
@@ -51,7 +53,7 @@ router.get("/:id/edit",asyncWrap(async (req,res)=>{
     res.render("listing/edit.ejs",{el});
 }));
 
-router.put("/:id",asyncWrap(async (req,res,next)=>{
+router.put("/:id",isLoggedIn,asyncWrap(async (req,res,next)=>{
     let result = listingSchema.validate(req.body);
     // console.log(result);
     if(result.error){
@@ -66,7 +68,7 @@ router.put("/:id",asyncWrap(async (req,res,next)=>{
     }
 }));
 
-router.delete("/:id",asyncWrap(async (req,res)=>{
+router.delete("/:id",isLoggedIn,asyncWrap(async (req,res)=>{
     let id = req.params.id;
     let rev = await Listing.findById(id);
     for (el of rev.reviews){
