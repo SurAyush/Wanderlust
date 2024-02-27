@@ -4,19 +4,23 @@
         <img src="<%=el.image%>" class="card-img-top" alt="Destination Picture">
         <div class="card-body">
           <h5 class="card-title"><b><%=el.title%></b></h5>
+          <p style="opacity: 0.6;">Owned by: <%= own.username%> </p>
           <p class="card-text"><%=el.description%></p>
           <p class="card-text"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night</i></p>
           <p class="card-text"><%=el.location%></p>
           <p class="card-text"><b><%=el.country%></b></p>
         </div>
-        <form class="ctr-frm" method="post" action = "/listings/<%=el._id%>?_method=DELETE">
+        <% if (currUser && currUser._id.equals(own._id)) { %>
+          <form class="ctr-frm" method="post" action = "/listings/<%=el._id%>?_method=DELETE">
             <button type="button" class="btn btn-primary mybtn"><a style="color: white" href="/listings/<%=el._id%>/edit">Edit the details</a></button>
           &nbsp;&nbsp;&nbsp;
             <button type = "submit" class="btn btn-primary mybtn2">Delete the place from WanderLust</button>
         </form>
+        <% } %>
         <br><br>
-        <hr>
-        <h5>Review this place!!!</h5>
+        <% if (currUser) { %>
+          <hr>
+          <h5>Give an anonymous review!!!</h5>
         <br>
         <form action="/listings/<%=el._id%>/reviews" method="post" class="needs-validation" novalidate>
           <div class="mb-3">
@@ -32,6 +36,7 @@
           </div>
           <button class="btn btn-outline-info">Submit</button>
         </form>
+        <% } %>
         <br><hr>
         <h5>All Reviews</h5>
         <br>
@@ -41,9 +46,11 @@
               <h5 class="card-title">Anonymous</h5>
               <p class="card-text"><b><%=it.rating%> stars</b></p>
               <p class="card-text"><%=it.content%></p>
-              <form class="mb-3" method="post" action="/listings/<%=el._id%>/reviews/<%=it._id%>?_method=DELETE">
-                <button class="btn btn-sm btn-outline-danger">Delete</button>
-              </form>
+              <% if (currUser && currUser._id.equals(it.author)) { %>
+                <form class="mb-3" method="post" action="/listings/<%=el._id%>/reviews/<%=it._id%>?_method=DELETE">
+                  <button class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+              <% } %>
             </div>
           <% } %>
           </div>
