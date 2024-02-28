@@ -8,7 +8,6 @@ const reviewController = require("../controller/review");
 router.post("/",isLoggedIn,asyncWrap(reviewController.addReview));
 
 
-
 //Delete Review
 router.delete("/:rid",isLoggedIn,isAuthor,asyncWrap(reviewController.deleteReview));
 
