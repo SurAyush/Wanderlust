@@ -1,54 +1,25 @@
 const express  = require("express");
 const router = express.Router();
-const user = require("../models/user.js");
 const passport = require("passport");
+const asyncWrap = require("../utils/asyncWrap");
 const { saveRedirectUrl } = require("../middlewares.js");
+const userController = require("../controller/user.js");
 
-router.get("/signup",(req,res)=>{
-    res.render("user/signup.ejs");
-});
+//signup page
+router.get("/signup",userController.renderSignup);
 
-router.get("/login",(req,res)=>{
-    res.render("user/login.ejs");
-});
+//login page
+router.get("/login",userController.renderLogin);
 
-router.get("/logout",(req,res,next)=>{
-    req.logout((err)=>{
-        if(err)
-            return next(err);
-        req.flash("success","You have successfully logged out");
-        res.redirect("/listings");
-    });
-});
+//logout user
+router.get("/logout",userController.logoutUser);
 
-router.post("/signup",async(req,res,next)=>{
-    try{
-        let {username, email, password} = req.body;
-        let u1 = new user({
-            email: email,
-            username: username
-        });
-        const registeredUser = await user.register(u1,password);
-        req.login(registeredUser,(err)=>{
-            if(err)
-                return next(err);
-            req.flash("success","User registered successfully");
-            res.redirect("/listings");
-        });
-    }
-    catch(err){
-        req.flash("error",err.message);
-        res.redirect("/signup");
-    }
-});
+//sign up user
+router.post("/signup",asyncWrap(userController.signupUser));
 
 //passport.autheticate is a middleware autheticator that autheticates the user
-router.post("/login",saveRedirectUrl,passport.authenticate("local",{failureRedirect: "/login", failureFlash: true}),async(req,res)=>{
-    let {username} = req.body;
-    req.flash("success",`Welcome back ${username}!`);
-    let redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-});
+//login in user
+router.post("/login",saveRedirectUrl,passport.authenticate("local",{failureRedirect: "/login", failureFlash: true}),asyncWrap(userController.loginUser));
 
 
 
