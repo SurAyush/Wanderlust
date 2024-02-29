@@ -1,7 +1,7 @@
 <% layout('layout/boilerplate') -%>
 <body>
     <div class="card card-listing">
-        <img src="<%=el.image%>" class="card-img-top" alt="Destination Picture">
+        <img src="<%=el.image.url%>" class="card-img-top" alt="Destination Picture">
         <div class="card-body">
           <h5 class="card-title"><b><%=el.title%></b></h5>
           <p style="opacity: 0.6;">Owned by: <%= own.username%> </p>
@@ -24,8 +24,20 @@
         <br>
         <form action="/listings/<%=el._id%>/reviews" method="post" class="needs-validation" novalidate>
           <div class="mb-3">
-            <label for="rate" class="form-label">Rate out of 5</label>
-            <input type="range" class="form-range" id="rate" min="1" max="5" step="1" value="3" name="review[rating]">
+            <fieldset class="starability-grow">
+              <legend>Rate the place:</legend>
+              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+              <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+              <label for="first-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+              <label for="first-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+              <label for="first-rate3" title="Average">3 stars</label>
+              <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+              <label for="first-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+              <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
           </div>
           <div class="mb-3">
             <label for="rev" class="form-label">Add a review</label><br>
@@ -43,8 +55,12 @@
           <div class="row">
           <% for(it of el.reviews ) { %>
             <div class="card col-5 ms-3 mb-2">
-              <h5 class="card-title">Anonymous</h5>
-              <p class="card-text"><b><%=it.rating%> stars</b></p>
+              <% if (currUser && currUser._id.equals(it.author)) { %>
+                <h5 class="card-title">You</h5>
+              <% } else {%>
+                <h5 class="card-title">Anonymous</h5>
+              <% }%>
+              <p class="starability-result" data-rating="<%=it.rating%>">  Rated: <%= it.rating%> stars </p>
               <p class="card-text"><%=it.content%></p>
               <% if (currUser && currUser._id.equals(it.author)) { %>
                 <form class="mb-3" method="post" action="/listings/<%=el._id%>/reviews/<%=it._id%>?_method=DELETE">

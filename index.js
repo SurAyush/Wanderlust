@@ -11,6 +11,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const user = require("./models/user.js");
 
+
 const sessionOptions = {
     secret: "mysupseccode123",
     resave: false,

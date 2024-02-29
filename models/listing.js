@@ -11,9 +11,8 @@ const listSchema = new Schema({
         type: "String"
     },
     image:{
-        type: "String",
-        default: link,
-        set: (v) => v===""?link:v
+        url: String,
+        filename: String
     },
     country:{
         type: "String"
