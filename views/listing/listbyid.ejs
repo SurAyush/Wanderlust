@@ -6,7 +6,7 @@
           <h5 class="card-title"><b><%=el.title%></b></h5>
           <p style="opacity: 0.6;">Owned by: <%= own.username%> </p>
           <p class="card-text"><%=el.description%></p>
-          <p class="card-text"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night</i></p>
+          <p class="card-text"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night <span style="opacity: 0.7;">+ 18% GSt</span></i></p>
           <p class="card-text"><%=el.location%></p>
           <p class="card-text"><b><%=el.country%></b></p>
         </div>
@@ -50,9 +50,10 @@
         </form>
         <% } %>
         <br><hr>
-        <h5>All Reviews</h5>
-        <br>
+        <% if(el.reviews.length>0){%>
           <div class="row">
+            <h5>All Reviews</h5>
+          <br>
           <% for(it of el.reviews ) { %>
             <div class="card col-5 ms-3 mb-2">
               <% if (currUser && currUser._id.equals(it.author)) { %>
@@ -70,6 +71,7 @@
             </div>
           <% } %>
           </div>
+          <%}%>
       </div>
       <br><br><br>
     

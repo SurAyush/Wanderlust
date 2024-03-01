@@ -3,16 +3,19 @@
   <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
-    <h3>All  Listings</h3>
+  <%-include("../includes/filter.ejs") %>
     <div class="card-container">
         <% for( el of dt ) { %>
             <a href="/listings/<%=el._id%>"><div class="card card-listing" style="width: 18rem;">
                 <img src="<%=el.image.url%>" class="card-img-top" alt="Destination Picture">
                 <div class="card-body">
                   <h5 class="card-title"><b><%=el.title%></b></h5>
-                  <p class="card-text"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night</i></p>
+                  <%let finalPrice = el.price * 1.18;%>
+                  <p class="card-text notax" style="display: inline;"><i>&#8377; <%=el.price.toLocaleString("en-IN")%> / night</i></p>
+                  <p class="card-text withtax" style="display: none;"><i>&#8377; <%=finalPrice.toLocaleString("en-IN")%> / night</i></p>
                 </div>
               </div></a>
             <% } %>
     </div>
 </body>
+<script src="/js/taxswitch.js"></script>

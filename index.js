@@ -88,7 +88,10 @@ app.listen(port,()=>{
 });
 
 app.get("/",(req,res)=>{
-    res.send("Root working fine");
+    res.redirect("/listings");
+});
+app.get("/updates",(req,res)=>{
+    res.render("updates.ejs");
 });
 
 app.use("/listings",listroute);

@@ -1,0 +1,21 @@
+.filtcont{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.flt{
+    margin-right: 1.5rem;
+    opacity: 0.6;
+    text-align: center;
+}
+.flt:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+#switch{
+    opacity: 1;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 0.25rem 1rem 0.25rem 1rem ;
+}
